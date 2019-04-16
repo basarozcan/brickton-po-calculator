@@ -5,13 +5,11 @@
         <b-field label="Set Number">
           <b-input v-model="number"></b-input>
         </b-field>
-        <b-field label="Price"><b-input v-model="price"></b-input></b-field>
-        <a v-if="isLoading" class="button is-warning" @click="calculate"
-          >Hesapla</a
-        >
-        <a v-else class="button is-primary" @click="calculate"
-          >Hesaplanıyor...</a
-        >
+        <b-field label="Price">
+          <b-input v-model="price"></b-input>
+        </b-field>
+        <a v-if="isLoading" class="button is-warning" @click="calculate">Hesapla</a>
+        <a v-else class="button is-primary" @click="calculate">Hesaplanıyor...</a>
       </section>
       <div class="result"></div>
     </div>
@@ -23,15 +21,16 @@
               <div class="media-content">
                 <div class="content">
                   <p>
-                    <strong>{{ item.number }}</strong
-                    ><small> {{ item.name }}</small
-                    ><br />
-                    <small
-                      >{{ item.price }} Ödendi -
-                      {{ item.income }} Kazanılacak</small
-                    ><br />
+                    <strong>{{ item.number }}</strong>
+                    <small>{{ item.name }}</small>
+                    <br>
+                    <small>
+                      {{ item.price }} Ödendi -
+                      {{ item.income }} Kazanılacak
+                    </small>
+                    <br>
                     <strong>x{{ item.incomex }}</strong>
-                    <small> +{{ item.income - item.price }} TL</small>
+                    <small> +{{ round((item.income - item.price),100) }} TL</small>
                   </p>
                 </div>
               </div>
@@ -77,9 +76,9 @@ export default {
           .then(getResponse => {
             this.items.push({
               number: this.number,
-              price: this.price,
+              price: this.round(this.price, 100),
               name: getResponse.data.data.title,
-              income: getResponse.data.try.sixmavg,
+              income: this.round(getResponse.data.try.sixmavg, 100),
               incomex: this.round(
                 getResponse.data.try.sixmavg / this.price,
                 1000
