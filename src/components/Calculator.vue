@@ -3,7 +3,7 @@
     <div class="notification">
       <section>
         <b-field label="Set Number">
-          <b-input v-model="number"></b-input>
+          <b-input ref="number" v-model="number"></b-input>
         </b-field>
         <b-field label="Price">
           <b-input v-model="price" @keyup.enter.native="calculate"></b-input>
@@ -100,6 +100,7 @@ export default {
     calculate() {
       this.isLoading = false;
       this.retrieve();
+      this.$refs.number.$el.children[0].focus();
     }
   }
 };
