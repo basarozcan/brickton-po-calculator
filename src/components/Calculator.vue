@@ -6,7 +6,7 @@
           <b-input v-model="number"></b-input>
         </b-field>
         <b-field label="Price">
-          <b-input v-model="price"></b-input>
+          <b-input v-model="price" @keyup.enter.native="calculate"></b-input>
         </b-field>
         <a v-if="isLoading" class="button is-warning" @click="calculate">Hesapla</a>
         <a v-else class="button is-primary" @click="calculate">Hesaplanıyor...</a>
