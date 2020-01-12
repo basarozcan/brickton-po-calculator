@@ -67,7 +67,7 @@ export default {
       try {
         await this.axios
           .get(
-            "https://basarozcan.com/brickton/calc/newapi.php?set=" +
+            "http://basarozcan.com/brickton/calc/newapi.php?set=" +
               this.number +
               "&price=" +
               this.price +
